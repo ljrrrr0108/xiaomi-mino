@@ -1,0 +1,41 @@
+system:
+  name: "小米 MINO 多Agent协同运营自动化系统"
+  version: "1.0.0"
+  log_level: "INFO"
+  log_file: "logs/system.log"
+
+agents:
+  orchestrator:
+    name: "总调度Agent"
+    max_concurrent_tasks: 10
+    task_timeout: 300
+
+  content_agent:
+    name: "内容运营Agent"
+    enabled: true
+    output_dir: "outputs/content"
+    templates_dir: "config/templates"
+
+  data_agent:
+    name: "数据分析Agent"
+    enabled: true
+    report_dir: "outputs/reports"
+    analysis_interval: 3600
+
+  scheduler_agent:
+    name: "任务调度Agent"
+    enabled: true
+    max_retries: 3
+    retry_delay: 60
+
+  monitor_agent:
+    name: "系统监控Agent"
+    enabled: true
+    check_interval: 30
+    alert_threshold:
+      cpu_percent: 80
+      memory_percent: 85
+
+message_bus:
+  max_queue_size: 1000
+  message_ttl: 3600
